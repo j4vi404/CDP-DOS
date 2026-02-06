@@ -157,34 +157,6 @@ CDP_TTL = 0xb4                        # 180 segundos
 CDP_MULTICAST_MAC = "01:00:0c:cc:cc:cc"  # MAC multicast CDP
 ```
 
-### Estructura del Paquete CDP Generado
-
-```
-CDP Packet:
-├─ Ethernet Header
-│  ├─ Destination MAC: 01:00:0c:cc:cc:cc (CDP Multicast)
-│  ├─ Source MAC: [RANDOM]
-│  └─ EtherType: SNAP
-│
-├─ LLC Header
-│  ├─ DSAP: 0xAA
-│  ├─ SSAP: 0xAA
-│  └─ Control: 0x03
-│
-├─ SNAP Header
-│  ├─ OUI: 0x00000C (Cisco)
-│  └─ Protocol ID: 0x2000 (CDP)
-│
-└─ CDP Payload
-   ├─ Version: 0x02
-   ├─ TTL: 180 segundos
-   ├─ Checksum: [calculado]
-   └─ TLVs:
-      ├─ Device ID: LAB-XXXX
-      ├─ Port ID: GigabitEthernet0/1
-      └─ Capabilities: 0x00000001 (Router)
-```
-
 ### TLVs (Type-Length-Value) Incluidos
 
 | Type | Nombre | Descripción | Valor |
@@ -208,9 +180,9 @@ sudo apt-get install python3-scapy
 ```
 
 
-## 🛡️ Medidas de Mitigación
+### 🛡️ Medidas de Mitigación
 
-### 1. Desactivar CDP Globalmente 
+## 1. Desactivar CDP Globalmente 
 
 ```cisco
 ! Desactivar CDP en todo el dispositivo
