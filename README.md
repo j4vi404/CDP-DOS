@@ -57,31 +57,26 @@ El script genera paquetes CDP falsos de manera masiva hacia el switch objetivo, 
 
 ## 🌐 Topología de Red
 
-### Diagrama de Ataque
+### Diagrama de Topología
 
-```
-                    ┌─────────────────┐
-                    │   Atacante      │
-                    │  192.168.1.100  │
-                    │   (Kali Linux)  │
-                    └────────┬────────┘
-                             │ eth0
-                             │
-                             │ CDP Flood
-                             │ (20 paquetes/seg)
-                             ↓
-                    ┌────────────────────┐
-                    │   Switch Objetivo  │
-                    │   Cisco 2960-X     │
-                    │   192.168.1.1      │
-                    │   CDP ENABLED      │
-                    └─────────┬──────────┘
-                              │
-                ┌─────────────┼─────────────┐
-                │             │             │
-           ┌────▼───┐    ┌────▼───┐   ┌────▼───┐
-           │  PC-1  │    │  PC-2  │   │  PC-3  │
-           └────────┘    └────────┘   └────────┘
+                                  (Cloud)
+                                     |
+                    +----------------+----------------+
+                    |                                 |
+                 e0/0                               e0/0
+                  R-SD                              R-STG
+           (15.0.7.0/24)      10.0.0.0/30           (15.0.8.0/24)
+                 e0/2 -------------------------------- e0/2
+                    |                                   |
+                 e0/1              PNET              e0/1
+                    |                                   |
+                 e0/0                               e0/0
+                  SW-SD                             SW-STG
+                 /    \                             /    \
+              e0/2    e0/1                       e0/1    e0/2
+               |        |                         |        |
+              e0       e0                       eth0     eth0
+            Victima  Atacante                    TI       TI
 ```
 
 ### Direccionamiento IP
@@ -161,41 +156,7 @@ pip3 install scapy
 # O desde repositorios
 sudo apt-get install python3-scapy
 ```
-### Configuración de la Interface
 
-```bash
-# Activar interface
-sudo ip link set eth0 up
-
-# Verificar
-ip link show eth0
-```
-
-### Script de Verificación
-
-```bash
-#!/bin/bash
-# check_requirements.sh
-
-if [ "$EUID" -ne 0 ]; then 
-    echo "[✗] Requiere permisos root"
-    exit 1
-fi
-
-if python3 -c "import scapy" 2>/dev/null; then
-    echo "[✓] Scapy instalado"
-else
-    echo "[✗] Instalar: pip3 install scapy"
-fi
-
-if ip link show eth0 &> /dev/null; then
-    echo "[✓] Interface eth0 disponible"
-else
-    echo "[✗] Interface eth0 no encontrada"
-fi
-```
-
----
 
 ## 🛡️ Medidas de Mitigación
 
@@ -220,11 +181,6 @@ Switch(config)# interface range GigabitEthernet0/1-24
 Switch(config-if-range)# no cdp enable
 Switch(config-if-range)# exit
 ```
-
-**Aplicar en:**
-- ✅ Interfaces de usuario (access ports)
-- ✅ Interfaces hacia redes no confiables
-- ✅ Interfaces expuestas
 
 ### 3. Port Security
 
@@ -268,29 +224,15 @@ Switch(config-access-map)# exit
 Switch(config)# vlan filter CDP-FILTER vlan-list 10
 ```
 
-### 7. Detección con IDS/IPS
-
-**Regla Snort:**
-```snort
-alert eth any any -> any any (
-    msg:"CDP Flood Attack Detected"; 
-    content:"|01 00 0C CC CC CC|"; 
-    threshold:type threshold, track by_src, count 100, seconds 60; 
-    classtype:network-scan; 
-    sid:1000001; 
-    rev:1;
-)
-```
-
 ### 8. Configuración de Baseline Completa
 
 ```cisco
-! === MITIGACIÓN COMPLETA ===
+ === MITIGACIÓN COMPLETA ===
 
-! 1. Desactivar CDP
+ 1. Desactivar CDP
 no cdp run
 
-! 2. Port Security
+ 2. Port Security
 interface range GigabitEthernet0/1-24
   switchport port-security
   switchport port-security maximum 2
@@ -299,15 +241,15 @@ interface range GigabitEthernet0/1-24
   no cdp enable
 exit
 
-! 3. Rate Limiting
+ 3. Rate Limiting
 mls qos
 mls rate-limit all cdp 50 10
 
-! 4. Logging
+ 4. Logging
 logging buffered 64000
 snmp-server enable traps cdp
 
-! 5. Guardar
+ 5. Guardar
 write memory
 ```
 
@@ -377,36 +319,12 @@ wireshark cdp_attack.pcap
 # Filtro en Wireshark: cdp
 ```
 
----
-
-## 📚 Referencias
-
-### Documentación Técnica
-- **Cisco CDP Protocol**: IOS Configuration Guide
-- **RFC 2922**: Physical Topology MIB
-- **Scapy Documentation**: https://scapy.readthedocs.io/
-
-### CVEs Relacionados
-- **CVE-2020-3119**: CDP Format String Vulnerability
-- **CVE-2020-3110**: CDP Memory Corruption
-- **CISCO-SA-20200226-CDP-DOS**: CDP DoS Vulnerability
-
 ### Herramientas
 - **Scapy**: https://scapy.net/
 - **Wireshark**: https://www.wireshark.org/
 - **Yersinia**: Framework para ataques layer 2
 
 ---
-
-## 📄 Licencia
-
-```
-MIT License - Educational Use Only
-Copyright (c) 2024 MR.J4VI MINYETE
-
-Uso exclusivo para fines educativos y pruebas autorizadas.
-EL SOFTWARE SE PROPORCIONA "TAL CUAL", SIN GARANTÍA.
-```
 
 ## ⚖️ Descargo de Responsabilidad
 
@@ -428,5 +346,3 @@ El autor NO se hace responsable del mal uso de esta herramienta.
 ---
 
 **Autor:** MR.J4VI MINYETE  
-**Versión:** 1.0  
-**Fecha:** Febrero 2026
