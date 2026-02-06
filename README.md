@@ -11,7 +11,10 @@ Este script es exclusivamente para **fines educativos y pruebas de penetración 
 - [Topología de Red](#topología-de-red)
 - [Parámetros Utilizados](#parámetros-utilizados)
 - [Medidas de Mitigación](#medidas-de-mitigación)
-
+---
+Enlace ataque CDP DOS
+https://youtu.be/cN74mOLoX0M?si=GvqW0Xw_nMHO28l5
+---
 ---
 
 ## 🎯 Objetivo del Script
