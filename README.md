@@ -1,4 +1,13 @@
 # 🔴 CDP DoS Attack 
+# 🔧 Network Security Tool
+
+<div align="center">
+
+![Python](https://img.shields.io/badge/python-3.8+-yellow.svg)
+
+*Herramienta automatizada para configuración, auditoría y seguridad de infraestructura de red*
+
+</div>
 
 ## ⚠️ ADVERTENCIA LEGAL
 Este script es exclusivamente para **fines educativos y pruebas de penetración autorizadas**. El uso no autorizado es **ILEGAL**. Use bajo su propia responsabilidad.
