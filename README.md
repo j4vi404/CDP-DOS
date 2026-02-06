@@ -76,24 +76,30 @@ Switch# show cdp traffic
 
 ## 📸 Capturas de Pantalla
 
-### 1. Antes del Ataque - Tabla CDP Normal
+### 1. Lab 
+
+<img width="1319" height="863" alt="image" src="https://github.com/user-attachments/assets/637ffc89-67be-4c28-9db1-a57ba8fe49e7" />
+
+---
+
+### 2. Antes del Ataque - Tabla CDP Normal
 
 <img width="1245" height="398" alt="image" src="https://github.com/user-attachments/assets/4b0edf2b-1772-46a0-a3c5-e3515ab74257" />
 
 ---
-### 2. Durante el Ataque - Tabla CDP Saturada
+### 3. Durante el Ataque - Tabla CDP Saturada
 
 <img width="1089" height="580" alt="image" src="https://github.com/user-attachments/assets/92525bf5-c752-4c2e-901a-0dd64d20b3b4" />
 
 ---
 
-### 3. Ejecución del programa
+### 4. Ejecución del programa
 
 <img width="849" height="190" alt="image" src="https://github.com/user-attachments/assets/fe24a64e-92ab-40a4-9ff8-953a5c6926d9" />
 
 ---
 
-### 4. Consumo de Recursos del Switch
+### 5. Consumo de Recursos del Switch
 
 <img width="1248" height="595" alt="image" src="https://github.com/user-attachments/assets/4f7a2ab1-192e-4f34-8b78-431b428a7b2a" />
 
