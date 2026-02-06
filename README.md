@@ -46,7 +46,7 @@ inestabilidad del sistema, e incluso reinicios inesperados del dispositivo.
 - Provocar inestabilidad (lentitud, reinicios, caídas)
 - Validar configuraciones de seguridad en laboratorios
 
-### Modo de USo:
+### Modo de Uso:
 El script genera paquetes CDP falsos de manera masiva hacia el switch objetivo, llenando su tabla de vecinos CDP hasta agotar recursos del sistema.
 
 ```
