@@ -304,35 +304,13 @@ write memory
 
 ---
 
-## 9.🚀 Modo de uso 
-
-### Instalación
-
-```bash
-# 1. Guardar el script
-nano cdp_flood.py
-
-# 2. Dar permisos
-chmod +x cdp_flood.py
-
-# 3. Instalar Scapy
-pip3 install scapy
-```
-
-### Ejecución
-
-```bash
-# Ejecutar ataque
-sudo python3 cdp_flood.py
-
-# Detener con Ctrl+C
 ```
 
 ### Monitoreo Durante el Ataque
 
 ```bash
 # Terminal 1: Ejecutar script
-sudo python3 cdp_flood.py
+sudo python3 CDP.py
 
 # Terminal 2: Monitorear tráfico CDP
 sudo tcpdump -i eth0 -e -n 'ether dst 01:00:0c:cc:cc:cc'
