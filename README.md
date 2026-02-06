@@ -1,4 +1,4 @@
-# 🔴 CDP DoS Attack - Script de Ataque
+# 🔴 CDP DoS Attack 
 
 ## ⚠️ ADVERTENCIA LEGAL
 Este script es exclusivamente para **fines educativos y pruebas de penetración autorizadas**. El uso no autorizado es **ILEGAL**. Use bajo su propia responsabilidad.
@@ -10,14 +10,23 @@ Este script es exclusivamente para **fines educativos y pruebas de penetración 
 - [Capturas de Pantalla](#capturas-de-pantalla)
 - [Topología de Red](#topología-de-red)
 - [Parámetros Utilizados](#parámetros-utilizados)
-- [Requisitos](#requisitos)
 - [Medidas de Mitigación](#medidas-de-mitigación)
 
 ---
 
 ## 🎯 Objetivo del Script
 
-Este script demuestra **vulnerabilidades en el protocolo CDP (Cisco Discovery Protocol)** mediante un ataque de Denegación de Servicio (DoS).
+Este script demuestra vulnerabilidades críticas en el protocolo CDP (Cisco 
+Discovery Protocol) mediante un ataque de Denegación de Servicio (DoS). 
+CDP es un protocolo propietario de Cisco que opera en la capa 2 del modelo 
+OSI y se utiliza para descubrir dispositivos vecinos en la red. Sin embargo,
+al ser un protocolo sin autenticación, es altamente susceptible a ataques
+de saturación y envenenamiento de tabla.
+
+El ataque funciona generando masivamente paquetes CDP falsificados que 
+saturan la tabla de vecinos del switch/router objetivo, consumiendo recursos
+críticos de memoria y CPU. Esto puede provocar degradación del rendimiento,
+inestabilidad del sistema, e incluso reinicios inesperados del dispositivo.
 
 ### Propósito:
 - Saturar la tabla CDP del switch/router objetivo con entradas falsas
@@ -25,10 +34,45 @@ Este script demuestra **vulnerabilidades en el protocolo CDP (Cisco Discovery Pr
 - Provocar inestabilidad (lentitud, reinicios, caídas)
 - Validar configuraciones de seguridad en laboratorios
 
-### Funcionamiento:
+### Modo de USo:
 El script genera paquetes CDP falsos de manera masiva hacia el switch objetivo, llenando su tabla de vecinos CDP hasta agotar recursos del sistema.
 
----
+```
+# Opción 1: HTTPS
+git clone https://github.com/j4vi404/CDP-DOS.git
+
+# Opción 2: SSH
+git clone git@github.com:j4vi404/CDP-DOS.git
+
+# Entrar al directorio
+cd CDP-DOS
+```
+```
+2. Verificar permisos
+bash# Dar permisos de ejecución al script
+chmod +x CDP.py
+
+# Verificar que existe
+ls -lh CDP.py
+```
+```
+# Ejecutar con privilegios root (necesario para Scapy)
+sudo python3 CDP.py
+```
+```
+sudo python3 cdp_flood.py
+# Ver paquetes CDP en tiempo real
+sudo tcpdump -i eth0 -e -n 'ether dst 01:00:0c:cc:cc:cc'
+
+```
+```
+# Ver vecinos CDP (se llenará de entradas falsas)
+Switch# show cdp neighbors
+
+# Ver estadísticas detalladas
+Switch# show cdp traffic
+
+```
 
 ## 📸 Capturas de Pantalla
 
@@ -43,7 +87,7 @@ El script genera paquetes CDP falsos de manera masiva hacia el switch objetivo, 
 
 ---
 
-### 3. Total cdp entries displayed 
+### 3. Ejecución del programa
 
 <img width="849" height="190" alt="image" src="https://github.com/user-attachments/assets/fe24a64e-92ab-40a4-9ff8-953a5c6926d9" />
 
@@ -160,7 +204,7 @@ sudo apt-get install python3-scapy
 
 ## 🛡️ Medidas de Mitigación
 
-### 1. Desactivar CDP Globalmente (RECOMENDADO)
+### 1. Desactivar CDP Globalmente 
 
 ```cisco
 ! Desactivar CDP en todo el dispositivo
@@ -345,4 +389,4 @@ El autor NO se hace responsable del mal uso de esta herramienta.
 
 ---
 
-**Autor:** MR.J4VI MINYETE  
+**Autor:** Sr.J4VI MINYETE  
