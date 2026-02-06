@@ -224,7 +224,7 @@ Switch(config-access-map)# exit
 Switch(config)# vlan filter CDP-FILTER vlan-list 10
 ```
 
-### 8. Configuración de Baseline Completa
+### 7. Configuración de Baseline Completa
 
 ```cisco
  === MITIGACIÓN COMPLETA ===
@@ -253,7 +253,7 @@ snmp-server enable traps cdp
 write memory
 ```
 
-### Checklist de Seguridad
+### 8. Checklist de Seguridad
 
 ```
 ☐ Desactivar CDP globalmente (no cdp run)
@@ -270,7 +270,7 @@ write memory
 
 ---
 
-## 🚀 Uso del Script
+## 9.🚀 Uso del Script
 
 ### Instalación
 
