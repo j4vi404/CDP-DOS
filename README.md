@@ -295,7 +295,7 @@ write memory
 
 ---
 
-## 9.🚀 Uso del Script
+## 9.🚀 Modo de uso 
 
 ### Instalación
 
